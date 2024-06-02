@@ -1,6 +1,6 @@
 # Corrección de Segundo Parcial: API de Gestión de Mangas
 
-Esta API RESTful permite administrar una colección de mangas, incluyendo operaciones para obtener, crear, actualizar y eliminar mangas, así como gestionar mangas favoritos de usuarios.
+Salvando la patria perdida del segundo parcial de programacion web. Esta API RESTful permite administrar una colección de mangas, incluyendo operaciones para obtener, crear, actualizar y eliminar mangas, así como gestionar mangas favoritos de usuarios.
 
 ## Endpoints
 
