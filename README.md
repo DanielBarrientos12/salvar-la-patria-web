@@ -18,30 +18,59 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
 
 - **Obtener todos los mangas:**
   - **GET** `/mangas`
-  - Respuesta exitosa:
+  - Respuesta exitosa (se muestran 3 ejemplos):
     ```json
     [
         {
-            "id": 1,
-            "nombre": "Naruto",
-            "fechaLanzamiento": "1999-09-21",
-            "temporadas": 10,
-            "pais": "Japón",
-            "anime": true,
-            "juego": false,
-            "pelicula": true,
-            "tipo": "Shonen"
-        },
-        {
             "id": 2,
-            "nombre": "One Piece",
+            "nombre": "One Piece OMAR",
             "fechaLanzamiento": "1997-07-22",
             "temporadas": 20,
-            "pais": "Japón",
-            "anime": true,
-            "juego": true,
-            "pelicula": true,
-            "tipo": "Shonen"
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 2,
+                "nombre": "China"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
+        },
+        {
+            "id": 3,
+            "nombre": "Attack on Titan",
+            "fechaLanzamiento": "2009-09-09",
+            "temporadas": 4,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 1,
+            "pais": {
+                "id": 3,
+                "nombre": "Korea"
+            },
+            "tipo": {
+                "id": 3,
+                "nombre": "Seinen"
+            }
+        },
+        {
+            "id": 4,
+            "nombre": "Sailor Moon",
+            "fechaLanzamiento": "1991-12-28",
+            "temporadas": 5,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 1,
+            "pais": {
+                "id": 4,
+                "nombre": "Estados Unidos"
+            },
+            "tipo": {
+                "id": 2,
+                "nombre": "Shojo"
+            }
         }
     ]
     ```
@@ -51,15 +80,21 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
   - Respuesta exitosa:
     ```json
     {
-        "id": 1,
-        "nombre": "Naruto",
-        "fechaLanzamiento": "1999-09-21",
-        "temporadas": 10,
-        "pais": "Japón",
-        "anime": true,
-        "juego": false,
-        "pelicula": true,
-        "tipo": "Shonen"
+        "id": 20,
+        "nombre": "Kaiju No. 8",
+        "fechaLanzamiento": "2024-04-13",
+        "temporadas": 1,
+        "anime": 1,
+        "juego": 0,
+        "pelicula": 0,
+        "pais": {
+            "id": 1,
+            "nombre": "Japón"
+        },
+        "tipo": {
+            "id": 1,
+            "nombre": "Shonen"
+        }
     }
     ```
   - Respuesta de error:
@@ -75,28 +110,34 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
   - Body de la solicitud:
     ```json
     {
-        "nombre": "Bleach",
-        "fechaLanzamiento": "2001-08-07",
-        "temporadas": 16,
+        "nombre": "Death Note",
+        "fechaLanzamiento": "2003-12-01",
+        "temporadas": 1,
         "paisId": 1,
-        "anime": true,
-        "juego": true,
-        "pelicula": true,
+        "anime": 1,
+        "juego": 1,
+        "pelicula": 1,
         "tipoId": 1
     }
     ```
   - Respuesta exitosa:
     ```json
     {
-        "id": 3,
-        "nombre": "Bleach",
-        "fechaLanzamiento": "2001-08-07",
-        "temporadas": 16,
-        "pais": "Japón",
-        "anime": true,
-        "juego": true,
-        "pelicula": true,
-        "tipo": "Shonen"
+        "id": 34,
+        "nombre": "Death Note",
+        "fechaLanzamiento": "2003-12-01",
+        "temporadas": 1,
+        "anime": 1,
+        "juego": 1,
+        "pelicula": 1,
+        "pais": {
+            "id": 1,
+            "nombre": "Japón"
+        },
+        "tipo": {
+            "id": 1,
+            "nombre": "Shonen"
+        }
     }
     ```
   - Respuesta de error por país no existente:
@@ -126,28 +167,34 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
   - Body de la solicitud:
     ```json
     {
-        "nombre": "Naruto Shippuden",
-        "fechaLanzamiento": "2007-02-15",
-        "temporadas": 20,
+        "nombre": "Death Note",
+        "fechaLanzamiento": "2003-12-01",
+        "temporadas": 1,
         "paisId": 1,
-        "anime": true,
-        "juego": true,
-        "pelicula": true,
-        "tipoId": 1
+        "anime": 1,
+        "juego": 1,
+        "pelicula": 1,
+        "tipoId": 3
     }
     ```
   - Respuesta exitosa:
     ```json
     {
-        "id": 1,
-        "nombre": "Naruto Shippuden",
-        "fechaLanzamiento": "2007-02-15",
-        "temporadas": 20,
-        "pais": "Japón",
-        "anime": true,
-        "juego": true,
-        "pelicula": true,
-        "tipo": "Shonen"
+        "id": 34,
+        "nombre": "Death Note",
+        "fechaLanzamiento": "2003-12-01",
+        "temporadas": 1,
+        "anime": 1,
+        "juego": 1,
+        "pelicula": 1,
+        "pais": {
+            "id": 1,
+            "nombre": "Japón"
+        },
+        "tipo": {
+            "id": 3,
+            "nombre": "Seinen"
+        }
     }
     ```
   - Respuesta de error por ID de manga no existente:
@@ -163,15 +210,21 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
   - Respuesta exitosa:
     ```json
     {
-        "id": 1,
+        "id": 17,
         "nombre": "Naruto",
         "fechaLanzamiento": "1999-09-21",
         "temporadas": 10,
-        "pais": "Japón",
-        "anime": true,
-        "juego": false,
-        "pelicula": true,
-        "tipo": "Shonen"
+        "anime": 1,
+        "juego": 0,
+        "pelicula": 1,
+        "pais": {
+            "id": 1,
+            "nombre": "Japón"
+        },
+        "tipo": {
+            "id": 3,
+            "nombre": "Seinen"
+        }
     }
     ```
   - Respuesta de error por ID de manga no existente:
@@ -193,30 +246,59 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
 
 - **Obtener mangas favoritos de un usuario:**
   - **GET** `/usuarios/{username}/favoritos`
-  - Respuesta exitosa:
+  - Respuesta exitosa (se muestran 3 ejemplos):
     ```json
     [
         {
-            "id": 1,
-            "nombre": "Naruto",
-            "fechaLanzamiento": "1999-09-21",
-            "temporadas": 10,
-            "pais": "Japón",
-            "anime": true,
-            "juego": false,
-            "pelicula": true,
-            "tipo": "Shonen"
-        },
-        {
             "id": 2,
-            "nombre": "One Piece",
+            "nombre": "One Piece OMAR",
             "fechaLanzamiento": "1997-07-22",
             "temporadas": 20,
-            "pais": "Japón",
-            "anime": true,
-            "juego": true,
-            "pelicula": true,
-            "tipo": "Shonen"
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 2,
+                "nombre": "China"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
+        },
+        {
+            "id": 5,
+            "nombre": "Dragon Ball",
+            "fechaLanzamiento": "1984-12-03",
+            "temporadas": 9,
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 5,
+                "nombre": "Colombia"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
+        },
+        {
+            "id": 6,
+            "nombre": "Tokyo Ghoul",
+            "fechaLanzamiento": "2011-09-08",
+            "temporadas": 3,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 0,
+            "pais": {
+                "id": 6,
+                "nombre": "Inglaterra"
+            },
+            "tipo": {
+                "id": 3,
+                "nombre": "Seinen"
+            }
         }
     ]
     ```
@@ -230,22 +312,61 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
 
 - **Agregar un manga a los favoritos de un usuario:**
   - **POST** `/usuarios/{username}/favoritos/{mangaId}`
-  - Respuesta exitosa:
+  - Respuesta exitosa (se muestran 3 ejemplos):
     ```json
-    {
-        "message": "Manga agregado a favoritos",
-        "manga": {
-            "id": 3,
-            "nombre": "Bleach",
-            "fechaLanzamiento": "2001-08-07",
-            "temporadas": 16,
-            "pais": "Japón",
-            "anime": true,
-            "juego": true,
-            "pelicula": true,
-            "tipo": "Shonen"
+    [
+        {
+            "id": 2,
+            "nombre": "One Piece OMAR",
+            "fechaLanzamiento": "1997-07-22",
+            "temporadas": 20,
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 2,
+                "nombre": "China"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
+        },
+        {
+            "id": 6,
+            "nombre": "Tokyo Ghoul",
+            "fechaLanzamiento": "2011-09-08",
+            "temporadas": 3,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 0,
+            "pais": {
+                "id": 6,
+                "nombre": "Inglaterra"
+            },
+            "tipo": {
+                "id": 3,
+                "nombre": "Seinen"
+            }
+        },
+        {
+            "id": 34,
+            "nombre": "Death Note",
+            "fechaLanzamiento": "2003-12-01",
+            "temporadas": 1,
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 1,
+                "nombre": "Japón"
+            },
+            "tipo": {
+                "id": 3,
+                "nombre": "Seinen"
+            }
         }
-    }
+    ]
     ```
   - Respuesta de error por ID de manga no existente:
     ```json
@@ -271,22 +392,61 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
 
 - **Eliminar un manga de los favoritos de un usuario:**
   - **DELETE** `/usuarios/{username}/favoritos/{mangaId}`
-  - Respuesta exitosa:
+  - Respuesta exitosa (se muestran 3 ejemplos):
     ```json
-    {
-        "message": "Manga eliminado de favoritos",
-        "manga": {
+    [
+        {
             "id": 2,
-            "nombre": "One Piece",
+            "nombre": "One Piece OMAR",
             "fechaLanzamiento": "1997-07-22",
             "temporadas": 20,
-            "pais": "Japón",
-            "anime": true,
-            "juego": true,
-            "pelicula": true,
-            "tipo": "Shonen"
+            "anime": 1,
+            "juego": 1,
+            "pelicula": 1,
+            "pais": {
+                "id": 2,
+                "nombre": "China"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
+        },
+        {
+            "id": 6,
+            "nombre": "Tokyo Ghoul",
+            "fechaLanzamiento": "2011-09-08",
+            "temporadas": 3,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 0,
+            "pais": {
+                "id": 6,
+                "nombre": "Inglaterra"
+            },
+            "tipo": {
+                "id": 3,
+                "nombre": "Seinen"
+            }
+        },
+        {
+            "id": 20,
+            "nombre": "Kaiju No. 8",
+            "fechaLanzamiento": "2024-04-13",
+            "temporadas": 1,
+            "anime": 1,
+            "juego": 0,
+            "pelicula": 0,
+            "pais": {
+                "id": 1,
+                "nombre": "Japón"
+            },
+            "tipo": {
+                "id": 1,
+                "nombre": "Shonen"
+            }
         }
-    }
+    ]
     ```
   - Respuesta de error por ID de manga no existente:
     ```json
@@ -309,3 +469,4 @@ Salvando la patria perdida del segundo parcial de programacion web. Esta API RES
         "msg": "Favorito no encontrado"
     }
     ```
+
