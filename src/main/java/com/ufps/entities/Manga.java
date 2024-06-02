@@ -44,6 +44,6 @@ public class Manga {
 			name = "favorito",
 			joinColumns = @JoinColumn(name = "manga_id"),
 			inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	public List<Usuario> usuarios;
+	private List<Usuario> usuarios;
 
 }

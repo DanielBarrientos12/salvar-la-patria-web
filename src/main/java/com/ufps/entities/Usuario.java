@@ -25,7 +25,7 @@ public class Usuario {
     
     @JsonIgnore
     @ManyToMany(mappedBy = "usuarios")
-    public List<Manga> mangas;
+    private List<Manga> mangas;
     
 
 }
