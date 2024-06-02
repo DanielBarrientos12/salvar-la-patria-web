@@ -10,14 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.ufps.entities.Manga;
+import com.ufps.models.MangaDTO;
 import com.ufps.services.MangaService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/mangas")
 public class MangaController {
 	
 	@Autowired
-	MangaService mangaService;
+	private MangaService mangaService;
 
 	@GetMapping("/status")
 	public Map<String, Object> getStatus() {
@@ -39,9 +44,15 @@ public class MangaController {
 	}
 
 	@PostMapping
-	public Manga createManga(@RequestBody Manga manga) {
-		mangaService.addManga(manga);
-		return manga;
+	public Manga createManga(@RequestBody MangaDTO mangaDTO) {
+        return mangaService.addManga(mangaDTO);
+    }
+	
+	@PutMapping("/{id}")
+	public String updateManga(@PathVariable String id, @RequestBody String entity) {
+		//TODO: process PUT request
+		
+		return entity;
 	}
 
 }
