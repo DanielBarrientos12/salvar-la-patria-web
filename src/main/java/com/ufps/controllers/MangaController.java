@@ -1,6 +1,7 @@
 package com.ufps.controllers;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,18 +68,24 @@ public class MangaController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteManga(@PathVariable Integer id){
-		Optional<Manga> manga = mangaService.findById(id);
-		if (manga.isPresent()) {
-			mangaService.deleteManga(id);
-			return ResponseEntity.ok(manga.get());
-		} else {
-			Map<String, Object> errorResponse = new HashMap<>();
-	        errorResponse.put("error", true);
-	        errorResponse.put("msg", "Objeto no encontrado");
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+	public ResponseEntity<?> deleteManga(@PathVariable Integer id) {
+		try {
+			Manga eliminatedManga = mangaService.deleteManga(id);
+			return ResponseEntity.ok(eliminatedManga);
+		} catch (RuntimeException e) {
+			if (e.getMessage().equals("Objeto no encontrado")) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(Collections.singletonMap("msg", "Manga not found"));
+			} else if (e.getMessage().equals("Manga tiene usuarios asociados")) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(Collections.singletonMap("msg", "Manga tiene usuarios asociados"));
+			} else {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+						.body(Collections.singletonMap("msg", e.getMessage()));
+			}
+
 		}
 	}
 
