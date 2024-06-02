@@ -30,8 +30,13 @@ public class MangaService {
 		return mangaRepository.findAll();
 	}
 
-	public Optional<Manga> findById(Integer id) {
-		return mangaRepository.findById(id);
+	public Manga findById(Integer id) {
+		Optional<Manga> manga = mangaRepository.findById(id);
+		if (manga.isPresent()) {
+			return manga.get();
+		} else {
+			throw new RuntimeException("Objeto no encontrado");
+		}
 	}
 
 	public Manga addManga(MangaDTO mangaDTO) {
@@ -44,54 +49,47 @@ public class MangaService {
 		manga.setPelicula(mangaDTO.getPelicula());
 
 		Pais pais = paisRepository.findById(mangaDTO.getPaisId())
-				.orElseThrow(() -> new RuntimeException("Pais not found"));
+				.orElseThrow(() -> new RuntimeException("Pais no existe"));
 		manga.setPais(pais);
 
 		Tipo tipo = tipoRepository.findById(mangaDTO.getTipoId())
-				.orElseThrow(() -> new RuntimeException("Tipo not found"));
+				.orElseThrow(() -> new RuntimeException("Tipo no existe"));
 		manga.setTipo(tipo);
 
 		return mangaRepository.save(manga);
 	}
 
 	public Manga updateManga(Integer id, MangaDTO mangaDTO) {
-		Optional<Manga> mangaCurrent = findById(id);
+		Manga mangaReturn = findById(id);
 
-		if (mangaCurrent.isPresent()) {
-			Manga mangaReturn = mangaCurrent.get();
+		mangaReturn.setNombre(mangaDTO.getNombre());
+		mangaReturn.setFechaLanzamiento(mangaDTO.getFechaLanzamiento());
+		mangaReturn.setTemporadas(mangaDTO.getTemporadas());
+		mangaReturn.setAnime(mangaDTO.getAnime());
+		mangaReturn.setJuego(mangaDTO.getJuego());
+		mangaReturn.setPelicula(mangaDTO.getPelicula());
 
-			mangaReturn.setNombre(mangaDTO.getNombre());
-			mangaReturn.setFechaLanzamiento(mangaDTO.getFechaLanzamiento());
-			mangaReturn.setTemporadas(mangaDTO.getTemporadas());
-			mangaReturn.setAnime(mangaDTO.getAnime());
-			mangaReturn.setJuego(mangaDTO.getJuego());
-			mangaReturn.setPelicula(mangaDTO.getPelicula());
+		Pais pais = paisRepository.findById(mangaDTO.getPaisId())
+				.orElseThrow(() -> new RuntimeException("Pais no existe"));
+		mangaReturn.setPais(pais);
 
-			Pais pais = paisRepository.findById(mangaDTO.getPaisId())
-					.orElseThrow(() -> new RuntimeException("Pais not found"));
-			mangaReturn.setPais(pais);
+		Tipo tipo = tipoRepository.findById(mangaDTO.getTipoId())
+				.orElseThrow(() -> new RuntimeException("Tipo no existe"));
+		mangaReturn.setTipo(tipo);
 
-			Tipo tipo = tipoRepository.findById(mangaDTO.getTipoId())
-					.orElseThrow(() -> new RuntimeException("Tipo not found"));
-			mangaReturn.setTipo(tipo);
-
-			return mangaRepository.save(mangaReturn);
-		} else {
-			throw new RuntimeException("Manga not found");
-		}
+		return mangaRepository.save(mangaReturn);
 	}
 
 	public Manga deleteManga(Integer id) {
-        Optional<Manga> manga = mangaRepository.findById(id);
+		Optional<Manga> manga = mangaRepository.findById(id);
 
-        if (manga.isEmpty()) {
-            throw new RuntimeException("Objeto no encontrado");
-        } else if (!manga.get().getUsuarios().isEmpty()) {
-            throw new RuntimeException("Manga tiene usuarios asociados");
-        }
+		if (manga.isEmpty()) {
+			throw new RuntimeException("Objeto no encontrado");
+		} else if (!manga.get().getUsuarios().isEmpty()) {
+			throw new RuntimeException("Manga tiene usuarios asociados");
+		}
 
-        mangaRepository.deleteById(id);
-        return manga.get();
-    }
-
+		mangaRepository.deleteById(id);
+		return manga.get();
+	}
 }
