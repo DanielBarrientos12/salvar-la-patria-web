@@ -53,5 +53,37 @@ public class MangaService {
 
         return mangaRepository.save(manga);
     }
+	
+	public Manga updateManga(Integer id, MangaDTO mangaDTO) {
+	    Optional<Manga> mangaCurrent = findById(id);
+
+	    if (mangaCurrent.isPresent()) {
+	        Manga mangaReturn = mangaCurrent.get();
+
+	        mangaReturn.setNombre(mangaDTO.getNombre());
+	        mangaReturn.setFechaLanzamiento(mangaDTO.getFechaLanzamiento());
+	        mangaReturn.setTemporadas(mangaDTO.getTemporadas());
+	        mangaReturn.setAnime(mangaDTO.getAnime());
+	        mangaReturn.setJuego(mangaDTO.getJuego());
+	        mangaReturn.setPelicula(mangaDTO.getPelicula());
+
+	        Pais pais = paisRepository.findById(mangaDTO.getPaisId())
+	                .orElseThrow(() -> new RuntimeException("Pais not found"));
+	        mangaReturn.setPais(pais);
+
+	        Tipo tipo = tipoRepository.findById(mangaDTO.getTipoId())
+	                .orElseThrow(() -> new RuntimeException("Tipo not found"));
+	        mangaReturn.setTipo(tipo);
+
+	        return mangaRepository.save(mangaReturn);
+	    } else {
+	        throw new RuntimeException("Manga not found");
+	    }
+	}
+	
+	public void deleteManga(Integer id) {
+		mangaRepository.deleteById(id);
+	}
+
 
 }
