@@ -1,9 +1,6 @@
 package com.ufps.controllers;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,14 +18,6 @@ public class MangaController {
 
 	@Autowired
 	private MangaService mangaService;
-
-	@GetMapping("/status")
-	public Map<String, Object> getStatus() {
-		Map<String, Object> status = new HashMap<>();
-		status.put("message", "Servidor en funcionamiento");
-		status.put("timestamp", LocalDateTime.now());
-		return status;
-	}
 
 	@GetMapping
 	public List<Manga> getAllMangas() {

@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CorreccionSegundoPrevioWebApplication {
+public class MangaBackend {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CorreccionSegundoPrevioWebApplication.class, args);
+		SpringApplication.run(MangaBackend.class, args);
 	}
 
 }
